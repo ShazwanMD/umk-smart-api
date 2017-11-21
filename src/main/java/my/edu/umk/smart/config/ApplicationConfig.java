@@ -14,9 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
         "my.edu.umk.smart.api",
 })
 @Import({
+	OraDataSourceConfig.class,
+	MysqlDataSourceConfig.class,
 })
 @PropertySource("classpath:application.properties")
 public class ApplicationConfig {
-
-
 }
