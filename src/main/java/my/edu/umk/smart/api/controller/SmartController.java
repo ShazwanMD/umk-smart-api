@@ -1,6 +1,7 @@
 package my.edu.umk.smart.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,6 +16,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
 import my.edu.umk.pams.connector.payload.StudentPayload;
 
 /**
@@ -25,14 +28,31 @@ import my.edu.umk.pams.connector.payload.StudentPayload;
 public class SmartController {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate oraJdbcTemplate;
 
-    @RequestMapping(value = "/student", method = RequestMethod.POST)
-    public ResponseEntity<String> createStudent(@RequestBody StudentPayload payload) {
+    @RequestMapping(value = "/student/smartCardPelajar", method = RequestMethod.POST)
+    public ResponseEntity<String> smartCardPelajar(@RequestBody StudentPayload payload) {
 
-        final String sql = "insert into smart(matricNo,name) values(?,?)";
+        final String sql = "insert into smartcard_pelajar(matricNo,name) values(?,?)";
 
-        jdbcTemplate.update(new PreparedStatementCreator() {
+        oraJdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setString(1, payload.getMatricNo());
+                ps.setString(2, payload.getName());
+                return ps;
+            }
+        });
+        return new ResponseEntity<String>("Success", HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/student/smartCardEncodePelajar", method = RequestMethod.POST)
+    public ResponseEntity<String> smartCardEncodePelajar(@RequestBody StudentPayload payload) {
+
+        final String sql = "insert into smartcard_encode_pelajar(matricNo,name) values(?,?)";
+
+        oraJdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql);
