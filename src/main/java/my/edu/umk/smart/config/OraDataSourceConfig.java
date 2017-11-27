@@ -27,7 +27,7 @@ public class OraDataSourceConfig {
         dataSource.setUsername(env.getProperty("db.umksmart.username"));
         dataSource.setPassword(env.getProperty("db.umksmart.password"));
         dataSource.setUrl(env.getProperty("db.umksmart.url"));
-        dataSource.setDriverClassName(env.getProperty("db.umksmart.driver-class-name"));
+        dataSource.setDriverClassName(env.getProperty("db.umksmart.driver"));
         dataSource.setMaxIdle(10);
         dataSource.setMaxActive(20);
         dataSource.setMaxWait(-1);
