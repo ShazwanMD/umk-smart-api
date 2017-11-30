@@ -346,8 +346,6 @@ public class SmartController {
 			e.printStackTrace();
 		} //or "SHA-1"
        final String md5Nric = nric;
-       System.out.println("nric :"+nric);
-       System.out.println("md5Nric :"+md5Nric);
         final String sql = "insert into radcheck(username,attribute,op,value) values(?,?,?,?)";
 
         mysqlJdbcTemplate.update(new PreparedStatementCreator() {
