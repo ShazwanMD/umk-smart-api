@@ -58,11 +58,11 @@ public class SmartController {
 					ps.setString(4, payload.getName());
 				}
 				ps.setString(5, payload.getName());
-				ps.setString(6, payload.getProgramCode());
-				ps.setString(7, payload.getProgramCodeDescriptionMs());
-				ps.setString(8, payload.getFacultyCode());
-				ps.setString(9, payload.getFacultyCodeDescriptionMs());
-				ps.setString(10, payload.getIcNo());
+				ps.setString(6, payload.getProgramCode().getCode());
+				ps.setString(7, payload.getProgramCode().getDescriptionMs());
+				ps.setString(8, payload.getFacultyCode().getCode());
+				ps.setString(9, payload.getFacultyCode().getDescription());
+				ps.setString(10, payload.getUserPayload().getNric());
 				ps.setDate(11, sqldNow);
 				return ps;
 			}
@@ -90,9 +90,9 @@ public class SmartController {
 				}
 				ps.setString(2, payload.getMatricNo());
 				ps.setString(3, payload.getName());
-				ps.setString(4, payload.getProgramCode());
-				ps.setString(5, payload.getFacultyCode());
-				ps.setString(6, payload.getIcNo());
+				ps.setString(4, payload.getProgramCode().getCode());
+				ps.setString(5, payload.getFacultyCode().getCode());
+				ps.setString(6, payload.getUserPayload().getNric());
 				ps.setString(7, payload.getMatricNo());
 				ps.setString(8, payload.getNationalityCode().getCode());
 				ps.setString(9, payload.getPrimaryAddress().getStateCode());
@@ -325,7 +325,7 @@ public class SmartController {
 				ps.setInt(53, 0);// alertsms
 				ps.setString(54, " ");// lang
 				ps.setString(55, "4");// courseduration
-				ps.setString(56, payload.getProgramCode());// programcode
+				ps.setString(56, payload.getProgramCode().getCode());// programcode
 				ps.setString(57, payload.getStudyMode().getDescription());// studymode
 				ps.setString(58, " ");// campus
 				ps.setString(59, payload.getUserPayload().getNric());// ic
